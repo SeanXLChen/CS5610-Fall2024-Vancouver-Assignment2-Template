@@ -1,0 +1,137 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download test files from private repository
+      run: |
+        git clone https://$GITHUB_ACTOR:${{ secrets.PAT_TOKEN }}@github.com/SeanXLChen/CS5610-Fall2024-Vancouver-Assignment2-autograder.git
+        mkdir test
+        cp -r CS5610-Fall2024-Vancouver-Assignment2-autograder/test/* ./test/  # Copy the test files to __tests__ folder
+        
+    - name: Remove CS5610-Fall2024-Vancouver-Assignment2-autograder folder (optional)
+      run: |
+        rm -rf CS5610-Fall2024-Vancouver-Assignment2-autograder  # This removes the CS5610-Fall2024-Vancouver-Assignment2-autograder folder entirely if you want to ignore it
+    
+    - name: Check directory structure
+      run: |
+        pwd
+        ls -R  # Output directory structure to confirm the layout
+    
+    - name: Test-01
+      id: test-01
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-01
+        setup-command: npm install
+        command: npx jest test01 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 10
+    
+    - name: Test-02
+      id: test-02
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-02
+        setup-command: npm install
+        command: npx jest test02 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 10
+    
+    - name: Test-03
+      id: test-03
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-03
+        setup-command: npm install
+        command: npx jest test03 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 10
+    
+    - name: Test-04
+      id: test-04
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-04
+        setup-command: npm install
+        command: npx jest test04 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 5
+    
+    - name: Test-05
+      id: test-05
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-05
+        setup-command: npm install
+        command: npx jest test05 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 7
+    
+    - name: Test-06
+      id: test-06
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-06
+        setup-command: npm install
+        command: npx jest test06 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 13
+    
+    - name: Test-07
+      id: test-07
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-07
+        setup-command: npm install
+        command: npx jest test07 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 10
+    
+    - name: Test-08
+      id: test-08
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-08
+        setup-command: npm install
+        command: npx jest test08 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 10
+    
+    - name: Test-09
+      id: test-09
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test-09
+        setup-command: npm install
+        command: npx jest test09 --detectOpenHandles --forceExit  # Use correct test folder
+        timeout: 10
+        max-score: 25
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-01_RESULTS: "${{steps.test-01.outputs.result}}"
+        TEST-02_RESULTS: "${{steps.test-02.outputs.result}}"
+        TEST-03_RESULTS: "${{steps.test-03.outputs.result}}"
+        TEST-04_RESULTS: "${{steps.test-04.outputs.result}}"
+        TEST-05_RESULTS: "${{steps.test-05.outputs.result}}"
+        TEST-06_RESULTS: "${{steps.test-06.outputs.result}}"
+        TEST-07_RESULTS: "${{steps.test-07.outputs.result}}"
+        TEST-08_RESULTS: "${{steps.test-08.outputs.result}}"
+        TEST-09_RESULTS: "${{steps.test-09.outputs.result}}"
+      with:
+        runners: test-01,test-02,test-03,test-04,test-05,test-06,test-07,test-08,test-09

@@ -1,0 +1,19 @@
+{
+  "name": "cs5610-fall2024-vancouver-assignment2-autograder",
+  "version": "1.0.0",
+  "description": "the autograder file for CS5610-Fall2024-Vancouver-Assignment2 using github action",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --detectOpenHandles --forceExit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^25.0.1"
+  }
+}
