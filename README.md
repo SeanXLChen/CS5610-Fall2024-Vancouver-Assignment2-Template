@@ -84,7 +84,7 @@ src/
     - **Name** (text input, `id="name"`, required)
     - **Email** (email input, `id="email"`, required)
     - **Message** (text area, `id="message"`, required)
-    - **Password** (password input, `id=passsword`, required)
+    - **Password** (password input, `id=password`, required)
       - The password field should display the input as `***` (obscured characters).
     - **Upload Profile Image** (file input, optional):
       - Accepts only `PNG` or `JPG` formats.
