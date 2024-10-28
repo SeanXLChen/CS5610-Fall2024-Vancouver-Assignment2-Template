@@ -65,8 +65,8 @@ src/
   - The page should display the current date and time when it loads.
   - The date must be displayed inside an element with the `id="current-date"`.
   - The time must be displayed inside an element with the `id="current-time"`.
-  - The date must follow the format `Mon Feb 07 2022` (3-letter abbreviation for weekday and month).
-  - The time must follow the format `8:10:56 PM` (12-hour clock with seconds).
+  - The date must follow the format `Mon, Feb 07, 2022` (3-letter abbreviation for weekday and month).
+  - The time must follow the format `08:10:56 PM` (12-hour clock with seconds).
 
 #### Dynamic Time Update (13 pts):
 - Use JavaScript to **update the time every second** dynamically, without refreshing the page.
